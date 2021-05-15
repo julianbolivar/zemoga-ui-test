@@ -844,14 +844,20 @@ select:hover {
     flex: 1;
     margin-right: 12px;
 
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 127px 1fr 20px auto;
     grid-template-rows: repeat(2, auto);
-    column-gap: 40px;
+    column-gap: 0;
     grid-template-areas:
-      "thumb name  extra"
-      ". description actions";
+      "thumb . name  . extra"
+      ". . description . actions";
 
     overflow: hidden;
+  }
+
+  .rulings__card.list .rulings__card-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
   }
 
   .rulings__card.list .rulings__card-thumb-wrapper.avg,
@@ -1081,8 +1087,21 @@ select:hover {
     width: auto;
   }
 
+  .rulings__card.list > .rulings__card-info-container {
+    grid-template-columns: auto 214px 1fr 40px auto;
+  }
+
   .rulings__card.list > .rulings__card-votes-container {
     min-height: 54px;
+  }
+
+  .rulings__card.list .rulings__card-thumb-wrapper > *:not(:last-child) {
+    margin-right: 9px;
+  }
+
+  .rulings__card.list > .rulings__card-votes-container img {
+    width: 22.5px;
+    height: 22.5px;
   }
 
   .rulings__card.list
@@ -1094,5 +1113,19 @@ select:hover {
     > .rulings__card-thumb-wrapper.thumb-unlike
     p {
     font-size: 27px;
+  }
+
+  .rulings__card.list .rulings__card-btn-vote,
+  .rulings__card.list .rulings__card-thumb-wrapper {
+    height: 45px;
+  }
+
+  .rulings__card.list .rulings__card-thumb-wrapper {
+    width: 45px;
+  }
+
+  .rulings__card.list .rulings__card-thumb-wrapper img {
+    width: 24px;
+    height: 24px;
   }
 }
