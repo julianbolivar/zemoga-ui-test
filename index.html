@@ -7,6 +7,10 @@
     <title>Rule of Thumb</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/htm@3.0.4" crossorigin></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 </head>
 <body>
     <nav class="nav" role="navigation">
@@ -96,11 +100,11 @@
                 <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><g stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd"><path d="M1 19L19 1M1 1l18 18"/></g></svg>
             </button>
         </aside>
-        <main role="main">
-            <!-- Start: Implementation -->
-            👉 Your code goes here 👈
-            <!-- End: Implementation -->
-        </main>
+        
+        <!-- Start: Implementation -->
+        <main role="main" id="previous_rulings"></main>
+        <!-- End: Implementation -->
+
         <aside class="banner banner-bottom" role="doc-tip" aria-label="Submit a name">
             <img
                 srcset="assets/img/bg-people.png 750w, assets/img/bg-people.@2x.png 1440w"
@@ -149,5 +153,7 @@
             </div>
         </footer>
     </div>
+    
+    <script type="module" src="./react-components/containers/PreviousRulings.js"></script>
 </body>
 </html>
