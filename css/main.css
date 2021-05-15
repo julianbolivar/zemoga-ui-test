@@ -530,11 +530,11 @@ select:hover {
 
 .rulings__card-info-container {
   padding-bottom: 12px;
-  background-color: blue;
 
   display: grid;
   grid-template-columns: 30px 1fr 30px;
   grid-template-rows: repeat(4, auto);
+  column-gap: 6px;
   grid-template-areas:
     "thumb name ."
     ". description ."
@@ -544,7 +544,8 @@ select:hover {
 
 .rulings__card-votes-container {
   height: 36px;
-  background-color: red;
+  display: flex;
+  justify-content: stretch;
 }
 
 .rulings__card-name,
@@ -582,13 +583,84 @@ select:hover {
 
 .rulings__card-extra {
   grid-area: extra;
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
   font-size: 12px;
   font-weight: bold;
 }
 
 .rulings__card-actions {
   grid-area: actions;
+  display: flex;
+  align-items: center;
+}
+
+.rulings__card-actions > *:not(:last-child) {
+  margin-right: 12px;
+}
+
+.rulings__card-btn-vote {
+  height: 38px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  font-family: "Lato";
+  font-size: 15px;
+
+  background-color: var(--color-darker-background);
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
+}
+
+.rulings__card-thumb-wrapper {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rulings__card-thumb-wrapper.avg {
+  grid-area: thumb;
+  align-self: flex-end;
+}
+
+.rulings__card-thumb-wrapper.thumb-like {
+  background-color: rgba(var(--color-green-positive), 1);
+}
+
+.rulings__card-thumb-wrapper.thumb-unlike {
+  background-color: rgba(var(--color-yellow-negative), 1);
+}
+
+.rulings__card-votes-container > .rulings__card-thumb-wrapper.thumb-like,
+.rulings__card-votes-container > .rulings__card-thumb-wrapper.thumb-unlike {
+  display: flex;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.rulings__card-votes-container > .rulings__card-thumb-wrapper.thumb-like p,
+.rulings__card-votes-container > .rulings__card-thumb-wrapper.thumb-unlike p {
+  color: var(--color-white);
+  font-family: "Lato";
+  font-size: 18px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.rulings__card-votes-container > .rulings__card-thumb-wrapper.thumb-like {
+  background-color: rgba(var(--color-green-positive), 0.6);
+  justify-content: flex-start;
+}
+
+.rulings__card-thumb-wrapper > *:not(:last-child) {
+  margin-right: 6px;
+}
+
+.rulings__card-votes-container > .rulings__card-thumb-wrapper.thumb-unlike {
+  background-color: rgba(var(--color-yellow-negative), 0.6);
+  justify-content: flex-end;
 }
 
 @media all and (min-width: 500px) {
@@ -762,6 +834,47 @@ select:hover {
   .rulings__card.grid {
     width: auto;
     height: auto;
+  }
+
+  .rulings__card.list {
+    justify-content: stretch;
+  }
+
+  .rulings__card.list > .rulings__card-info-container {
+    flex: 1;
+    margin-right: 12px;
+
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: repeat(2, auto);
+    column-gap: 40px;
+    grid-template-areas:
+      "thumb name  extra"
+      ". description actions";
+
+    overflow: hidden;
+  }
+
+  .rulings__card.list .rulings__card-thumb-wrapper.avg,
+  .rulings__card.list .rulings__card-actions {
+    align-self: flex-start;
+  }
+
+  .rulings__card.list > .rulings__card-votes-container {
+    min-height: 36px;
+  }
+
+  .rulings__card.list .rulings__card-name {
+    align-self: center;
+  }
+
+  .rulings__card.list .rulings__card-extra {
+    align-self: center;
+    margin-bottom: 0;
+  }
+
+  .rulings__card.list .rulings__card-description {
+    align-self: center;
+    margin: 0;
   }
 }
 
@@ -968,7 +1081,18 @@ select:hover {
     width: auto;
   }
 
-  .rulings__card-votes-container {
-    height: 54px;
+  .rulings__card.list > .rulings__card-votes-container {
+    min-height: 54px;
+  }
+
+  .rulings__card.list
+    .rulings__card-votes-container
+    > .rulings__card-thumb-wrapper.thumb-like
+    p,
+  .rulings__card.list
+    .rulings__card-votes-container
+    > .rulings__card-thumb-wrapper.thumb-unlike
+    p {
+    font-size: 27px;
   }
 }
