@@ -2,7 +2,7 @@
 
 ### Overview
 
-Project made with React library in a stardard web. It don't have the structure created by 'create-react-app' so I use React for create only one part of the web. You need follow the next instructions because the project use Javascript as a module and If you open the "index.html" in your browser, You will see a CORS error in the console.
+This project is made with React library in a stardard web. It doesn’t have the structure created by 'create-react-app' so I use React to create only one part of the web. You need to follow the next instructions because the project uses Javascript as a module. If you open the "index.html" in your browser, you will see a CORS error in the console.
 
 ### Instructions
 
