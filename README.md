@@ -12,7 +12,7 @@ This project is made with React library in a stardard web. It doesn’t have the
 4. For Windows users only: do `cd /D "C:\Program Files\nodejs"`.
    By changing to that directory, the installed npm package will be reachable from anywhere - as long as `C:\Program Files\nodejs` is in your `%PATH%` environment variable.
 5. Install live-server globally: npm install -g live-server.
-6. Change directory to where your page lives `(Folder where live the index.html)`: `cd <test-project-folder>`.
-   (Should open localhost:8080 in your default browser and show the project.)
+6. Change the directory where your page lives `(Folder with the index.html)`: `cd <test-project-folder>`.
+   (Should open localhost:8080 in your default browser)
 
 **Nota:** You can also use Live Server plugin in VSCode to run the project
