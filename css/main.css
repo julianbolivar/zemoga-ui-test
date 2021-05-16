@@ -48,7 +48,7 @@ hr[role="separator"] {
 
 .nav {
   position: fixed;
-  z-index: 2;
+  z-index: 20;
   top: 0;
   display: flex;
   width: calc(100vw - 2rem);
@@ -515,9 +515,42 @@ select:hover {
 }
 
 .rulings__card {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  overflow: hidden;
+}
+
+.rulings__card .rulings__card-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.rulings__card .rulings__card-bg > img {
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
+
+.rulings__card .rulings__card-bg > div {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 250px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.0001) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.rulings__card > *:not(.rulings__card-bg-img) {
+  z-index: 10;
 }
 
 .rulings__card.list,
@@ -525,7 +558,6 @@ select:hover {
   width: 300px;
   min-width: 300px;
   height: 300px;
-  background-color: gray;
 }
 
 .rulings__card-info-container {
@@ -844,7 +876,7 @@ select:hover {
     flex: 1;
     margin-right: 12px;
 
-    grid-template-columns: auto 127px 1fr 20px auto;
+    grid-template-columns: auto 180px 1fr 20px auto;
     grid-template-rows: repeat(2, auto);
     column-gap: 0;
     grid-template-areas:
@@ -882,9 +914,32 @@ select:hover {
     align-self: center;
     margin: 0;
   }
+
+  .rulings__card.list .rulings__card-bg > img {
+    width: 216px;
+    height: auto;
+
+    -webkit-mask-image: linear-gradient(to left, transparent 0, black 10%);
+    mask-image: linear-gradient(to left, transparent 0, black 10%);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .rulings__card.list .rulings__card-bg > div {
+    right: 0;
+    width: calc(92%);
+
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.0001) 0%,
+      #888888 19.79%,
+      #666666 50%,
+      rgba(51, 51, 51, 0.6) 71.88%
+    );
+  }
 }
 
-@media all and (min-width: 1100px) {
+@media all and (min-width: 1130px) {
   html,
   body {
     font-size: 18px;
@@ -1127,5 +1182,13 @@ select:hover {
   .rulings__card.list .rulings__card-thumb-wrapper img {
     width: 24px;
     height: 24px;
+  }
+
+  .rulings__card.list .rulings__card-bg > img {
+    width: 267px;
+  }
+
+  .rulings__card.list .rulings__card-bg > div {
+    width: calc(100% - 45px);
   }
 }

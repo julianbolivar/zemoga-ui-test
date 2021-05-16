@@ -2,7 +2,7 @@ const { createElement, useMemo } = React;
 const html = htm.bind(createElement);
 
 function CardRuling({ item, itemsTemplate }) {
-  const { name, description, category, votes } = item;
+  const { name, description, category, votes, picture, lastUpdated } = item;
   const { positive, negative } = votes;
 
   const avgVotesInfo = useMemo(() => {
@@ -19,8 +19,34 @@ function CardRuling({ item, itemsTemplate }) {
     return { classColor, urlImage, positivePercent, negativePercent };
   }, [votes]);
 
+  const dateCategoryInfo = useMemo(() => {
+    const currentDate = dayjs();
+    const rulingDate = dayjs(lastUpdated);
+
+    const years = currentDate.diff(rulingDate, "year");
+    const months = currentDate.diff(rulingDate, "months");
+    const days = currentDate.diff(rulingDate, "days");
+
+    let dateInfo = "";
+    if (years > 1) dateInfo = `${years} ${years > 1 ? "years" : "year"} ago`;
+    else if (months > 1)
+      dateInfo = `${months} ${months > 1 ? "months" : "month"} ago`;
+    else dateInfo = `${days} ${days > 1 ? "days" : "day"} ago`;
+
+    const categoryCap = category.charAt(0).toUpperCase() + category.slice(1);
+
+    return `${dateInfo} in ${categoryCap}`;
+  }, [category, lastUpdated]);
+
   return html`
     <div className=${`rulings__card ${itemsTemplate}`}>
+      <div className="rulings__card-bg">
+        <img
+          src=${`assets/img/people_rulings/${picture.replace(".png", "")}.jpg`}
+        />
+        <div />
+      </div>
+
       <div className="rulings__card-info-container">
         <div
           className=${`rulings__card-thumb-wrapper avg ${avgVotesInfo.classColor}`}
@@ -30,7 +56,7 @@ function CardRuling({ item, itemsTemplate }) {
 
         <span className="rulings__card-name">${name}</span>
         <span className="rulings__card-description">${description}</span>
-        <span className="rulings__card-extra">${category}</span>
+        <span className="rulings__card-extra">${dateCategoryInfo}</span>
         <div className="rulings__card-actions">
           <div className="rulings__card-thumb-wrapper thumb-like">
             <img src="assets/img/thumbs-up.svg" alt="thumb icon" />
@@ -63,8 +89,5 @@ function CardRuling({ item, itemsTemplate }) {
     </div>
   `;
 }
-
-// style=${{ height: "100%", width: avgVotesInfo.positivePercent }}
-// style=${{ height: "100%", width: avgVotesInfo.negativePercent }}
 
 export default CardRuling;
