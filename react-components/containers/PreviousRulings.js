@@ -1,19 +1,14 @@
-import rulingsData from "../../assets/data.js";
-
 import HeaderPreviousRulings from "../components/HeaderPreviousRulings.js";
 import CardRuling from "../components/CardRuling.js";
+import usePreviousRulings from "../hooks/usePreviousRulings.js";
 
-const { createElement, useState, useCallback } = React;
+const { createElement } = React;
 const render = ReactDOM.render;
 const html = htm.bind(createElement);
 
 function PreviousRulings() {
-  const [itemsTemplate, setItemsTemplate] = useState("grid");
-
-  const onChangeItemsTemplate = useCallback(
-    ({ target: { value } }) => setItemsTemplate(value),
-    []
-  );
+  const { onChangeItemsTemplate, itemsTemplate, dataSource, onChangeVote } =
+    usePreviousRulings();
 
   return html`
     <${HeaderPreviousRulings}
@@ -22,12 +17,14 @@ function PreviousRulings() {
       itemsTemplate=${itemsTemplate}
     />
     <div key="rulings__items" className=${`rulings__items ${itemsTemplate}`}>
-      ${rulingsData.data.map((rulingItem, index) => {
+      ${dataSource.map((rulingItem, index) => {
         const key = `ruling-card-${index}`;
         return html`<${CardRuling}
           key=${key}
           item=${rulingItem}
           itemsTemplate=${itemsTemplate}
+          index=${index}
+          onChangeVote=${onChangeVote}
         />`;
       })}
     </div>

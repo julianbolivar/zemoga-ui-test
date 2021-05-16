@@ -1,11 +1,18 @@
 import useCardRuling from "../hooks/useCardRuling.js";
 
-const { createElement, useMemo } = React;
+const { createElement } = React;
 const html = htm.bind(createElement);
 
-function CardRuling({ item, itemsTemplate }) {
+function CardRuling({ item, itemsTemplate, index, onChangeVote }) {
   const { name, description, picture } = item;
-  const { avgVotesInfo, dateCategoryInfo } = useCardRuling(item);
+  const {
+    likeValue,
+    setLikeValue,
+    avgVotesInfo,
+    dateCategoryInfo,
+    onClickVote,
+    hasVoted,
+  } = useCardRuling({ ...item, index, onChangeVote });
 
   return html`
     <div className=${`rulings__card ${itemsTemplate}`}>
@@ -27,13 +34,37 @@ function CardRuling({ item, itemsTemplate }) {
         <span className="rulings__card-description">${description}</span>
         <span className="rulings__card-extra">${dateCategoryInfo}</span>
         <div className="rulings__card-actions">
-          <div className="rulings__card-thumb-wrapper thumb-like">
+          <div
+            className=${`rulings__card-thumb-wrapper thumb-like ${
+              likeValue === 1 && "selected"
+            } ${hasVoted && "disabled"}`}
+            onClick=${() => {
+              if (hasVoted) return;
+              likeValue === 1 ? setLikeValue(0) : setLikeValue(1);
+            }}
+          >
             <img src="assets/img/thumbs-up.svg" alt="thumb icon" />
           </div>
-          <div className="rulings__card-thumb-wrapper thumb-unlike">
+          <div
+            className=${`rulings__card-thumb-wrapper thumb-unlike ${
+              likeValue === -1 && "selected"
+            } ${hasVoted && "disabled"}`}
+            onClick=${() => {
+              if (hasVoted) return;
+              likeValue === -1 ? setLikeValue(0) : setLikeValue(-1);
+            }}
+          >
             <img src="assets/img/thumbs-down.svg" alt="thumb icon" />
           </div>
-          <button className="rulings__card-btn-vote">Vote now</button>
+          <button
+            className=${`rulings__card-btn-vote ${
+              likeValue === 0 && "disabled"
+            }`}
+            disabled=${!likeValue}
+            onClick=${onClickVote}
+          >
+            ${hasVoted ? "Vote again" : "Vote now"}
+          </button>
         </div>
       </div>
       <div className="rulings__card-votes-container">

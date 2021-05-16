@@ -630,6 +630,18 @@ select:hover {
   margin-right: 12px;
 }
 
+.rulings__card-actions > *:not(.disabled) {
+  cursor: pointer;
+}
+
+.rulings__card-actions .rulings__card-thumb-wrapper.selected {
+  border: 2px solid var(--color-white);
+}
+
+.rulings__card-actions .disabled {
+  opacity: 0.4;
+}
+
 .rulings__card-btn-vote {
   height: 38px;
   padding-left: 1.5rem;
